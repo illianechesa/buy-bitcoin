@@ -13,9 +13,9 @@
       <p>Please, introduce the amount you would like to transfer. The conversion to BUSD will be done in an ratio 1:1 with the USD.</p>
       <form nz-form [formGroup]="depositAmountForm" (ngSubmit)="handleConfirm()">
         <nz-form-item>
-          <nz-form-control nzErrorTip="Please input a number">
+          <nz-form-control nzErrorTip="Please enter a positive number">
             <nz-input-group>
-              <input type="number" nz-input formControlName="amount" placeholder="i.e. 1000" />
+              <input type="number" min="1" nz-input formControlName="amount" placeholder="i.e. 1000" />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
