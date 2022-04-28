@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { Currency } from 'src/app/core/enums';
 
 @Component({
@@ -18,7 +19,7 @@ export class UserCashComponent implements OnInit {
 
   depositAmountForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private message: NzMessageService) {
     this.depositAmountForm = this.formBuilder.group({
       amount: [null, [Validators.required]],
     });
@@ -36,6 +37,7 @@ export class UserCashComponent implements OnInit {
     this.availableCash = newBalance;
     this.isDepositModalVisible = false;
     this.resetAmountField();
+    this.message.create('success', `Balance was updated`);
   }
 
   closeModal(): void {
