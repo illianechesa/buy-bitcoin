@@ -46,8 +46,5 @@ export class UserCashComponent implements OnInit {
 
   private resetAmountField(): void {
     this.depositAmountForm.controls['amount'].reset();
-    this.depositAmountForm.controls['amount'].markAsPristine();
-    this.depositAmountForm.controls['amount'].markAsUntouched();
-    this.depositAmountForm.controls['amount'].updateValueAndValidity();
   }
 }
