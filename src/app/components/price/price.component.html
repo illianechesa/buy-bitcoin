@@ -1,0 +1,17 @@
+<nz-content class="price">
+  <div class="d-flex">
+    <div>
+      <h5>{{ pairBTCBUSD }}</h5>
+    </div>
+    <div class="ms-3">
+      <h5 class="volatility-{{ wentUp }}">{{ price }}</h5>
+    </div>
+    <div class="ms-1 mt-2">
+      <span class="volatility-{{ wentUp }}">
+        {{ percentageVariation }}
+      </span>
+      <i *ngIf="wentUp === volatility.UP" class="arrow-up" nz-icon nzType="arrow-up" nzTheme="outline"></i>
+      <i *ngIf="wentUp === volatility.DOWN" class="arrow-down" nz-icon nzType="arrow-down" nzTheme="outline"></i>
+    </div>
+  </div>
+</nz-content>
