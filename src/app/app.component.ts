@@ -18,10 +18,6 @@ export class AppComponent {
     this.currentPrice = newPrice;
   }
 
-  updateBalance(newBalance: number): void {
-    this.balance = newBalance;
-  }
-
   newOrder(order: Order): void {
     this.orders.push(order);
   }

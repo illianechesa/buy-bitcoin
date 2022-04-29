@@ -10,7 +10,7 @@ import { Currency } from 'src/app/core/enums';
   styleUrls: ['./user-cash.component.less'],
 })
 export class UserCashComponent implements OnInit {
-  @Input() balance?: number;
+  @Input() balance: number = 0;
   @Output() balanceChange: EventEmitter<number> = new EventEmitter<number>();
 
   currency: Currency = Currency.BUSD;
@@ -32,11 +32,9 @@ export class UserCashComponent implements OnInit {
   }
 
   handleConfirm(): void {
-    const newBalance = this.balance + this.depositAmountForm.controls['amount'].value;
-    this.balanceChange.emit(newBalance);
-    this.balance = newBalance;
-    this.isDepositModalVisible = false;
+    this.updateBalance();
     this.resetAmountField();
+    this.isDepositModalVisible = false;
     this.message.create('success', `Balance was updated`);
   }
 
@@ -44,6 +42,12 @@ export class UserCashComponent implements OnInit {
     this.depositAmount = undefined;
     this.isDepositModalVisible = false;
     this.resetAmountField();
+  }
+
+  private updateBalance(): void {
+    const newBalance = this.balance + this.depositAmountForm.controls['amount'].value;
+    this.balanceChange.emit(newBalance);
+    this.balance = newBalance;
   }
 
   private resetAmountField(): void {

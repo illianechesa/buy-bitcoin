@@ -1,4 +1,4 @@
-<div class="order-table">
+<div class="order-table mt-5 ms-2">
   <nz-empty *ngIf="isEmpty" [nzNotFoundContent]="emptyTemplate"></nz-empty>
   <ng-template #emptyTemplate> There are no open orders </ng-template>
   <nz-table *ngIf="!isEmpty" [nzData]="orders" [nzShowPagination]="false" [nzFrontPagination]="false" [nzScroll]="{ y: '270px' }">

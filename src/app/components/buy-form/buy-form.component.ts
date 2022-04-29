@@ -12,7 +12,7 @@ import { Order } from 'src/app/core/interfaces';
 })
 export class BuyFormComponent implements OnInit {
   @Input() currentPrice: number = 40000;
-  @Input() balance?: number;
+  @Input() balance: number = 0;
   @Output() balanceChange: EventEmitter<number> = new EventEmitter<number>();
   @Output() newOrder: EventEmitter<Order> = new EventEmitter<Order>();
 

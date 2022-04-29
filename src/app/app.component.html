@@ -7,7 +7,7 @@
     </div>
     <div class="d-flex justify-content-between">
       <app-buy-form [(balance)]="balance" [currentPrice]="currentPrice" (newOrder)="newOrder($event)"></app-buy-form>
-      <app-order-table class="order-table mt-5" [orders]="orders"></app-order-table>
+      <app-order-table class="order-table" [orders]="orders"></app-order-table>
     </div>
   </nz-content>
 </nz-layout>
