@@ -19,7 +19,7 @@ export class UserCashComponent implements OnInit {
 
   depositAmountForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private message: NzMessageService) {
+  constructor(private formBuilder: FormBuilder, private messageService: NzMessageService) {
     this.depositAmountForm = this.formBuilder.group({
       amount: [null, [Validators.required]],
     });
@@ -35,7 +35,7 @@ export class UserCashComponent implements OnInit {
     this.updateBalance();
     this.resetAmountField();
     this.isDepositModalVisible = false;
-    this.message.create('success', `Balance was updated`);
+    this.messageService.success('Balance was updated');
   }
 
   closeModal(): void {

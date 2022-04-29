@@ -1,3 +1,3 @@
 export enum Pair {
-  BTCBUSD = 'BTCBUSD',
+  BTCBUSD = 'BTC/BUSD',
 }
