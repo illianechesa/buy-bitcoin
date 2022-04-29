@@ -8,9 +8,13 @@ import { Order } from 'src/app/core/interfaces/Order';
   styleUrls: ['./order-table.component.less'],
 })
 export class OrderTableComponent implements OnInit {
-  @Input() orders?: Order[] = [];
+  @Input() orders: Order[] = [];
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  get isEmpty(): boolean {
+    return this.orders.length === 0;
+  }
 }

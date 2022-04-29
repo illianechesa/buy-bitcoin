@@ -30,15 +30,17 @@ export class BuyFormComponent implements OnInit {
   ngOnInit(): void {}
 
   confirmBuy(): void {
-    const btcQuantity = this.buyBitcoinForm.controls['btcQuantity'].value;
-    const busdAmount = this.buyBitcoinForm.controls['busdAmount'].value;
+    const btcQuantity = this.buyBitcoinForm.controls['btcQuantity'];
+    const busdAmount = this.buyBitcoinForm.controls['busdAmount'];
     if (this.balance !== undefined) {
-      if (this.balance < busdAmount) {
+      if (this.balance < busdAmount.value) {
         this.messageService.error('You do not have enough balance in your account. Please, deposit first');
       } else {
-        this.order = this.createOrder(btcQuantity, busdAmount);
-        this.balanceChange.emit(this.balance - busdAmount);
+        this.order = this.createOrder(btcQuantity.value, busdAmount.value);
+        this.balanceChange.emit(this.balance - busdAmount.value);
         this.newOrder.emit(this.order);
+        btcQuantity.reset();
+        busdAmount.reset();
         this.messageService.success('Order created successfully');
       }
     }
@@ -58,7 +60,7 @@ export class BuyFormComponent implements OnInit {
 
   getQuittung(): string {
     return `
-    BTC: ${this.buyBitcoinForm.controls['btcQuantity'].value} / Amount: ${this.buyBitcoinForm.controls['busdAmount'].value} BUSD
+    BTC: ${this.buyBitcoinForm.controls['btcQuantity'].value?.toFixed(6)} / Amount: ${this.buyBitcoinForm.controls['busdAmount'].value} BUSD
     `;
   }
 
@@ -68,7 +70,7 @@ export class BuyFormComponent implements OnInit {
       pair: Pair.BTCBUSD,
       quantity: btcQuantity,
       amount: busdAmount,
-      price: this.currentPrice,
+      price: busdAmount / btcQuantity,
     };
   }
 }

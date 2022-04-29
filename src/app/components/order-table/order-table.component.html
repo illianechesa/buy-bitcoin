@@ -1,20 +1,24 @@
-<nz-table *ngIf="orders" [nzData]="orders" [nzScroll]="{ y: '270px' }">
-  <thead>
-    <tr>
-      <th nzWidth="30px">Date</th>
-      <th nzWidth="30px">Pair</th>
-      <th nzWidth="40px">Quantity</th>
-      <th nzWidth="30px">Amount</th>
-      <th nzWidth="30px">Price</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let order of orders">
-      <td>{{ order.date | date }}</td>
-      <td>{{ order.pair }}</td>
-      <td>{{ order.quantity | number: '1.0-6' }}</td>
-      <td>{{ order.amount }}</td>
-      <td>{{ order.price }}</td>
-    </tr>
-  </tbody>
-</nz-table>
+<div class="order-table">
+  <nz-empty *ngIf="isEmpty" [nzNotFoundContent]="emptyTemplate"></nz-empty>
+  <ng-template #emptyTemplate> There are no open orders </ng-template>
+  <nz-table *ngIf="!isEmpty" [nzData]="orders" [nzShowPagination]="false" [nzFrontPagination]="false" [nzScroll]="{ y: '270px' }">
+    <thead>
+      <tr>
+        <th nzWidth="30px">Date</th>
+        <th nzWidth="30px">Pair</th>
+        <th nzWidth="40px">Quantity</th>
+        <th nzWidth="30px">Amount</th>
+        <th nzWidth="30px">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.date | date }}</td>
+        <td>{{ order.pair }}</td>
+        <td>{{ order.quantity | number: '1.0-6' }}</td>
+        <td>{{ order.amount }}</td>
+        <td>{{ order.price }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

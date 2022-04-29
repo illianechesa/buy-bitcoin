@@ -21,7 +21,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-label [nzSpan]="10" nzFor="busdAmount"> Amount (BUSD) </nz-form-label>
-      <nz-form-control nzErrorTip="Please enter a positive number">
+      <nz-form-control nzErrorTip="Please enter a positive number above 1">
         <nz-input-group>
           <input type="number" min="1" nz-input formControlName="busdAmount" (keyup)="busdAmountChange()" placeholder="i.e. 1000" />
         </nz-input-group>
