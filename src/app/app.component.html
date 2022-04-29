@@ -6,8 +6,8 @@
       <app-price (currentPrice)="updateCurrentPrice($event)"></app-price>
     </div>
     <div class="d-flex justify-content-between">
-      <app-buy-form [currentPrice]="currentPrice" [(balance)]="balance"></app-buy-form>
-      <app-order-table></app-order-table>
+      <app-buy-form [(balance)]="balance" [currentPrice]="currentPrice" (newOrder)="newOrder($event)"></app-buy-form>
+      <app-order-table class="order-table mt-5" [orders]="orders"></app-order-table>
     </div>
   </nz-content>
 </nz-layout>

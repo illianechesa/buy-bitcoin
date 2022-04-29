@@ -17,6 +17,7 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 
 import { AppComponent } from './app.component';
@@ -46,6 +47,7 @@ registerLocaleData(en);
     NzInputNumberModule,
     NzToolTipModule,
     NzPopconfirmModule,
+    NzTableModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

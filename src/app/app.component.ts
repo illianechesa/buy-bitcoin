@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Order } from './core/interfaces';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,10 +10,19 @@ import { Component } from '@angular/core';
 export class AppComponent {
   readonly title = 'BuyBitcoin';
   readonly author = 'by Illia Nechesa Dernovyi';
-  balance?: number;
+  balance: number = 100000;
   currentPrice: number = 40000;
+  orders: Order[] = [];
 
   updateCurrentPrice(newPrice: number): void {
     this.currentPrice = newPrice;
+  }
+
+  updateBalance(newBalance: number): void {
+    this.balance = newBalance;
+  }
+
+  newOrder(order: Order): void {
+    this.orders.push(order);
   }
 }

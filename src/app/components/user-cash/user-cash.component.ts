@@ -13,7 +13,6 @@ export class UserCashComponent implements OnInit {
   @Input() balance?: number;
   @Output() balanceChange: EventEmitter<number> = new EventEmitter<number>();
 
-  availableCash: number = 100000;
   currency: Currency = Currency.BUSD;
   isDepositModalVisible = false;
   depositAmount?: number;
@@ -33,9 +32,9 @@ export class UserCashComponent implements OnInit {
   }
 
   handleConfirm(): void {
-    const newBalance = this.availableCash + this.depositAmountForm.controls['amount'].value;
+    const newBalance = this.balance + this.depositAmountForm.controls['amount'].value;
     this.balanceChange.emit(newBalance);
-    this.availableCash = newBalance;
+    this.balance = newBalance;
     this.isDepositModalVisible = false;
     this.resetAmountField();
     this.message.create('success', `Balance was updated`);

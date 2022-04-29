@@ -1,1 +1,20 @@
-<p>order-table works!</p>
+<nz-table *ngIf="orders" [nzData]="orders" [nzScroll]="{ y: '270px' }">
+  <thead>
+    <tr>
+      <th nzWidth="30px">Date</th>
+      <th nzWidth="30px">Pair</th>
+      <th nzWidth="40px">Quantity</th>
+      <th nzWidth="30px">Amount</th>
+      <th nzWidth="30px">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.date | date }}</td>
+      <td>{{ order.pair }}</td>
+      <td>{{ order.quantity | number: '1.0-6' }}</td>
+      <td>{{ order.amount }}</td>
+      <td>{{ order.price }}</td>
+    </tr>
+  </tbody>
+</nz-table>

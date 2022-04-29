@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { Pair } from 'src/app/core/enums';
+import { Order } from 'src/app/core/interfaces';
 
 @Component({
   selector: 'app-buy-form',
@@ -12,9 +14,11 @@ export class BuyFormComponent implements OnInit {
   @Input() currentPrice: number = 40000;
   @Input() balance?: number;
   @Output() balanceChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() newOrder: EventEmitter<Order> = new EventEmitter<Order>();
 
   buyBitcoinForm: FormGroup;
   quitung: string = '';
+  order?: Order;
 
   constructor(private formBuilder: FormBuilder, private messageService: NzMessageService) {
     this.buyBitcoinForm = this.formBuilder.group({
@@ -32,7 +36,10 @@ export class BuyFormComponent implements OnInit {
       if (this.balance < busdAmount) {
         this.messageService.error('You do not have enough balance in your account. Please, deposit first');
       } else {
-        this.balanceChange.emit(1);
+        this.order = this.createOrder(btcQuantity, busdAmount);
+        this.balanceChange.emit(this.balance - busdAmount);
+        this.newOrder.emit(this.order);
+        this.messageService.success('Order created successfully');
       }
     }
   }
@@ -53,5 +60,15 @@ export class BuyFormComponent implements OnInit {
     return `
     BTC: ${this.buyBitcoinForm.controls['btcQuantity'].value} / Amount: ${this.buyBitcoinForm.controls['busdAmount'].value} BUSD
     `;
+  }
+
+  private createOrder(btcQuantity: number, busdAmount: number): Order {
+    return {
+      date: new Date(),
+      pair: Pair.BTCBUSD,
+      quantity: btcQuantity,
+      amount: busdAmount,
+      price: this.currentPrice,
+    };
   }
 }
