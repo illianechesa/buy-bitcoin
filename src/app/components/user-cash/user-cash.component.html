@@ -1,7 +1,9 @@
 <nz-content class="user-cash">
   <div class="d-flex justify-content-between">
     <div>
-      <h5>Balance: {{ balance }} {{ currency }}</h5>
+      <h5>
+        Balance: <strong>{{ balance }}</strong> {{ currency }}
+      </h5>
     </div>
     <div>
       <button nz-button nzType="primary" class="button confirm-button" (click)="openDepositModal()">Deposit</button>

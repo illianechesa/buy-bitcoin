@@ -1,7 +1,13 @@
 <div class="mt-5 ms-2">
   <nz-empty *ngIf="isEmpty" [nzNotFoundContent]="emptyTemplate"></nz-empty>
   <ng-template #emptyTemplate> There are no purchases yet </ng-template>
-  <nz-table *ngIf="!isEmpty" [nzData]="orders" [nzShowPagination]="false" [nzFrontPagination]="false" [nzScroll]="{ y: '270px' }">
+  <nz-table
+    *ngIf="!isEmpty"
+    [nzData]="orders"
+    [nzShowPagination]="false"
+    [nzFrontPagination]="false"
+    [nzScroll]="{ y: 'calc(100vh - ' + '450px' + ')' }"
+  >
     <thead>
       <tr>
         <th nzWidth="30px">Date</th>
