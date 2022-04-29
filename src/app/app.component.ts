@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   readonly title = 'BuyBitcoin';
   readonly author = 'by Illia Nechesa Dernovyi';
-  balance: number = 0;
+  balance?: number;
+  currentPrice: number = 40000;
 
-  updateBalance(newBalance: number): void {
-    this.balance = newBalance;
-    console.log(this.balance);
+  updateCurrentPrice(newPrice: number): void {
+    this.currentPrice = newPrice;
   }
 }

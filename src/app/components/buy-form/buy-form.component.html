@@ -1,0 +1,45 @@
+<div class="mt-5 buy-form">
+  <div class="d-flex">
+    <h5>Buy Bitcoin</h5>
+    <i
+      class="infoIcon mt-2 ms-2"
+      nz-icon
+      nz-tooltip
+      nzTooltipTitle="The calculation is based on the latest price. Please note the final values may be slightly different as you are buying at market price"
+      nzType="info-circle"
+    >
+    </i>
+  </div>
+  <form class="mt-4" nz-form [formGroup]="buyBitcoinForm">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="10" nzFor="btcQuantity"> Quantity </nz-form-label>
+      <nz-form-control nzErrorTip="Please enter a positive number above 0.000001">
+        <nz-input-group>
+          <input type="number" min="0.000001" nz-input formControlName="btcQuantity" (keyup)="btcQuantityChange()" placeholder="i.e. 10" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="10" nzFor="busdAmount"> Amount (BUSD) </nz-form-label>
+      <nz-form-control nzErrorTip="Please enter a positive number">
+        <nz-input-group>
+          <input type="number" min="1" nz-input formControlName="busdAmount" (keyup)="busdAmountChange()" placeholder="i.e. 1000" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <div class="d-flex justify-content-end">
+      <button
+        nz-button
+        nz-popconfirm
+        [disabled]="!buyBitcoinForm.valid"
+        [nzPopconfirmTitle]="getQuittung()"
+        (nzOnConfirm)="confirmBuy()"
+        (nzOnCancel)="cancel()"
+        nzPopconfirmPlacement="bottomLeft"
+        [nzType]="'primary'"
+      >
+        Buy
+      </button>
+    </div>
+  </form>
+</div>

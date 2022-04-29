@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -10,9 +10,10 @@ import { Currency } from 'src/app/core/enums';
   styleUrls: ['./user-cash.component.less'],
 })
 export class UserCashComponent implements OnInit {
-  @Output() balanceAdded: EventEmitter<number> = new EventEmitter<number>();
+  @Input() balance?: number;
+  @Output() balanceChange: EventEmitter<number> = new EventEmitter<number>();
 
-  availableCash: number = 0;
+  availableCash: number = 100000;
   currency: Currency = Currency.BUSD;
   isDepositModalVisible = false;
   depositAmount?: number;
@@ -33,7 +34,7 @@ export class UserCashComponent implements OnInit {
 
   handleConfirm(): void {
     const newBalance = this.availableCash + this.depositAmountForm.controls['amount'].value;
-    this.balanceAdded.emit(newBalance);
+    this.balanceChange.emit(newBalance);
     this.availableCash = newBalance;
     this.isDepositModalVisible = false;
     this.resetAmountField();

@@ -1,7 +1,13 @@
 <nz-layout class="wrapper">
   <nz-page-header class="site-page-header" [nzTitle]="title" [nzSubtitle]="author"></nz-page-header>
   <nz-content class="content">
-    <app-user-cash (balanceAdded)="updateBalance($event)"></app-user-cash>
-    <app-price></app-price>
+    <app-user-cash [(balance)]="balance"></app-user-cash>
+    <div class="d-flex justify-content-center">
+      <app-price (currentPrice)="updateCurrentPrice($event)"></app-price>
+    </div>
+    <div class="d-flex justify-content-between">
+      <app-buy-form [currentPrice]="currentPrice" [(balance)]="balance"></app-buy-form>
+      <app-order-table></app-order-table>
+    </div>
   </nz-content>
 </nz-layout>
