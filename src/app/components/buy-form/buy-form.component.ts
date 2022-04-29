@@ -51,7 +51,7 @@ export class BuyFormComponent implements OnInit {
   }
 
   cancel(): void {
-    this.messageService.info('Cancel');
+    this.messageService.error('Cancel');
   }
 
   getPreReceipt(): string {
@@ -70,13 +70,13 @@ export class BuyFormComponent implements OnInit {
     };
   }
 
-  private addOrder(btcQuantity: number, busdAmount: number) {
+  private addOrder(btcQuantity: number, busdAmount: number): void {
     this.order = this.createOrder(btcQuantity, busdAmount);
     this.balanceChange.emit(this.balance - busdAmount);
     this.newOrder.emit(this.order);
   }
 
-  private resetFields(btcQuantity: AbstractControl, busdAmount: AbstractControl) {
+  private resetFields(btcQuantity: AbstractControl, busdAmount: AbstractControl): void {
     btcQuantity.reset();
     busdAmount.reset();
   }
