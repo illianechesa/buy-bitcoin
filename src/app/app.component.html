@@ -3,7 +3,7 @@
   <nz-content class="content">
     <app-user-cash [(balance)]="balance"></app-user-cash>
     <div class="d-flex justify-content-center">
-      <app-price (currentPrice)="updateCurrentPrice($event)"></app-price>
+      <app-price [(currentPrice)]="currentPrice"></app-price>
     </div>
     <div class="d-flex justify-content-between">
       <app-buy-form [(balance)]="balance" [currentPrice]="currentPrice" (newOrder)="newOrder($event)"></app-buy-form>

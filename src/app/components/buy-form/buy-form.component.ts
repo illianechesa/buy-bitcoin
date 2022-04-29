@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Pair } from 'src/app/core/enums';
@@ -32,17 +32,13 @@ export class BuyFormComponent implements OnInit {
   confirmBuy(): void {
     const btcQuantity = this.buyBitcoinForm.controls['btcQuantity'];
     const busdAmount = this.buyBitcoinForm.controls['busdAmount'];
-    if (this.balance !== undefined) {
-      if (this.balance < busdAmount.value) {
-        this.messageService.error('You do not have enough balance in your account. Please, deposit first');
-      } else {
-        this.order = this.createOrder(btcQuantity.value, busdAmount.value);
-        this.balanceChange.emit(this.balance - busdAmount.value);
-        this.newOrder.emit(this.order);
-        btcQuantity.reset();
-        busdAmount.reset();
-        this.messageService.success('Order created successfully');
-      }
+    if (this.balance < busdAmount.value) {
+      this.messageService.error('You do not have enough balance in your account. Please, deposit first');
+      this.resetFields(btcQuantity, busdAmount);
+    } else {
+      this.addOrder(btcQuantity.value, busdAmount.value);
+      this.resetFields(btcQuantity, busdAmount);
+      this.messageService.success('Order created successfully');
     }
   }
 
@@ -58,7 +54,7 @@ export class BuyFormComponent implements OnInit {
     this.messageService.info('Cancel');
   }
 
-  getQuittung(): string {
+  getPreReceipt(): string {
     return `
     BTC: ${this.buyBitcoinForm.controls['btcQuantity'].value?.toFixed(6)} / Amount: ${this.buyBitcoinForm.controls['busdAmount'].value} BUSD
     `;
@@ -72,5 +68,16 @@ export class BuyFormComponent implements OnInit {
       amount: busdAmount,
       price: busdAmount / btcQuantity,
     };
+  }
+
+  private addOrder(btcQuantity: number, busdAmount: number) {
+    this.order = this.createOrder(btcQuantity, busdAmount);
+    this.balanceChange.emit(this.balance - busdAmount);
+    this.newOrder.emit(this.order);
+  }
+
+  private resetFields(btcQuantity: AbstractControl, busdAmount: AbstractControl) {
+    btcQuantity.reset();
+    busdAmount.reset();
   }
 }

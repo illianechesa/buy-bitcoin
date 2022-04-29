@@ -5,7 +5,7 @@
       class="infoIcon mt-2 ms-2"
       nz-icon
       nz-tooltip
-      nzTooltipTitle="The calculation is based on the latest price before your input. Please, note that current price is constantly changing"
+      nzTooltipTitle="The calculation is based on the latest price before your input. Please, note that current price is constantly changing."
       nzType="info-circle"
     >
     </i>
@@ -32,7 +32,7 @@
         nz-button
         nz-popconfirm
         [disabled]="!buyBitcoinForm.valid"
-        [nzPopconfirmTitle]="getQuittung()"
+        [nzPopconfirmTitle]="getPreReceipt()"
         (nzOnConfirm)="confirmBuy()"
         (nzOnCancel)="cancel()"
         nzPopconfirmPlacement="bottomLeft"

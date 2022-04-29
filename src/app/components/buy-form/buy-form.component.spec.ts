@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 
 import { BuyFormComponent } from './buy-form.component';
 
@@ -8,9 +11,10 @@ describe('BuyFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuyFormComponent ]
-    })
-    .compileComponents();
+      declarations: [BuyFormComponent],
+      imports: [NzMessageModule],
+      providers: [FormBuilder, NzMessageService],
+    }).compileComponents();
   });
 
   beforeEach(() => {

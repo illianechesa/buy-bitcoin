@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NzMessageModule, NzMessageService } from 'ng-zorro-antd/message';
 
 import { UserCashComponent } from './user-cash.component';
 
@@ -8,9 +12,10 @@ describe('UserCashComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserCashComponent ]
-    })
-    .compileComponents();
+      declarations: [UserCashComponent],
+      imports: [NzMessageModule, BrowserAnimationsModule],
+      providers: [FormBuilder, NzMessageService],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +26,12 @@ describe('UserCashComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should update balance properly', () => {
+    component.balance = 10000;
+    component.depositAmountForm.controls['amount'].setValue(1);
+    component.handleConfirm();
+    expect(component.balance).toEqual(10001);
   });
 });

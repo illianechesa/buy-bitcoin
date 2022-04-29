@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { Currency, Volatility } from 'src/app/core/enums';
 
@@ -10,7 +10,8 @@ import { PriceService } from './price.service';
   styleUrls: ['./price.component.less'],
 })
 export class PriceComponent implements OnInit {
-  @Output() currentPrice: EventEmitter<number> = new EventEmitter<number>();
+  @Input() currentPrice: number = 40000;
+  @Output() currentPriceChange: EventEmitter<number> = new EventEmitter<number>();
 
   MAX_BTC_VALUE: number = 40100;
   MIN_BTC_VALUE: number = 39900;
@@ -27,6 +28,13 @@ export class PriceComponent implements OnInit {
     this.initiatePricesLoop();
   }
 
+  updateNewPrice(newPrice: number): void {
+    this.percentageVariation = this.percentagePriceVariation(newPrice);
+    this.wentUp = newPrice > this.price ? Volatility.UP : Volatility.DOWN;
+    this.currentPriceChange.emit(newPrice);
+    this.price = newPrice;
+  }
+
   get pairBTCBUSD(): string {
     return `${this.currency.BTC} / ${this.currency.BUSD}`;
   }
@@ -38,10 +46,7 @@ export class PriceComponent implements OnInit {
   private initiatePricesLoop(): void {
     setInterval(() => {
       const newPrice = this.priceService.getPrice();
-      this.percentageVariation = this.percentagePriceVariation(newPrice);
-      this.wentUp = newPrice > this.price ? Volatility.UP : Volatility.DOWN;
-      this.currentPrice.emit(newPrice);
-      this.price = newPrice;
+      this.updateNewPrice(newPrice);
     }, 1000);
   }
 }

@@ -14,10 +14,6 @@ export class AppComponent {
   currentPrice: number = 40000;
   orders: Order[] = [];
 
-  updateCurrentPrice(newPrice: number): void {
-    this.currentPrice = newPrice;
-  }
-
   newOrder(order: Order): void {
     this.orders.push(order);
   }

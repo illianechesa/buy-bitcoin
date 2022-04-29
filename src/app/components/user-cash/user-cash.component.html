@@ -20,7 +20,15 @@
           </nz-form-control>
         </nz-form-item>
         <div class="d-flex justify-content-end">
-          <button nz-button class="button confirm-button" [nzType]="'primary'" (click)="handleConfirm()">Confirm</button>
+          <button
+            nz-button
+            class="button confirm-button"
+            [nzType]="'primary'"
+            (click)="handleConfirm()"
+            [disabled]="!depositAmountForm.valid"
+          >
+            Confirm
+          </button>
           <button nz-button class="ms-1" [nzType]="'default'" (click)="closeModal()">Cancel</button>
         </div>
       </form>
