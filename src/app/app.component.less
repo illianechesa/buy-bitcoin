@@ -1,14 +1,30 @@
 
-.wrapper {
-  background-color: rgb(247, 247, 247);
-  height: 100%;
-  .site-page-header {
-    background-color: rgb(235, 235, 235);
-  }
-  .content {
-    padding: 36px 24px;
-    .order-table {
-      width: 70%;
+:host {
+  .wrapper {
+    background-color: rgb(154, 23, 190);
+    height: 100%;
+    .site-page-header {
+      background-color:black;
+      ::ng-deep
+      .ant-page-header-heading-title{
+       color: white;
+      }
+      ::ng-deep .ant-page-header-heading-sub-title {
+        color: white;
+      }
     }
+    .content {
+      padding: 36px 24px;
+      .order-table {
+        margin-left: 10px;
+        width: 70%;
+      }
+    }
+  }
+}
+::ng-deep {
+  .ant-btn-primary:enabled {
+    color: white;
+    background: black;
   }
 }
