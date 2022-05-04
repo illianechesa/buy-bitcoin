@@ -15,6 +15,7 @@
         <th nzWidth="40px">Quantity</th>
         <th nzWidth="30px">Amount</th>
         <th nzWidth="30px">Price</th>
+        <th nzWidth="30px">Status</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
         <td>{{ order.quantity | number: '1.0-6' }}</td>
         <td>{{ order.amount }}</td>
         <td>{{ order.price }}</td>
+        <td>{{ order.status }}</td>
       </tr>
     </tbody>
   </nz-table>

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Pair } from 'src/app/core/enums';
+import { OrderStatus, Pair } from 'src/app/core/enums';
 import { Order } from 'src/app/core/interfaces';
 
 @Component({
@@ -67,6 +67,7 @@ export class BuyFormComponent implements OnInit {
       quantity: btcQuantity,
       amount: busdAmount,
       price: busdAmount / btcQuantity,
+      status: busdAmount / btcQuantity < this.currentPrice ? OrderStatus.COMPLETED : OrderStatus.PENDING,
     };
   }
 

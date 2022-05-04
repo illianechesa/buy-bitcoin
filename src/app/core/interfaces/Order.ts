@@ -1,4 +1,4 @@
-import { Pair } from '../enums';
+import { OrderStatus, Pair } from '../enums';
 
 export interface Order {
   date: Date;
@@ -6,4 +6,5 @@ export interface Order {
   quantity: number;
   amount: number;
   price: number;
+  status: OrderStatus;
 }
