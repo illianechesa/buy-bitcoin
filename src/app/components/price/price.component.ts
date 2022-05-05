@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Subject, interval } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { PriceService } from './price.service';
   templateUrl: './price.component.html',
   styleUrls: ['./price.component.less'],
 })
-export class PriceComponent implements OnInit {
+export class PriceComponent implements OnInit, OnDestroy {
   @Input() currentPrice: number = 40000;
   @Output() currentPriceChange: EventEmitter<number> = new EventEmitter<number>();
 
