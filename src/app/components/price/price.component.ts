@@ -15,9 +15,6 @@ export class PriceComponent implements OnInit, OnDestroy {
   @Input() currentPrice: number = 40000;
   @Output() currentPriceChange: EventEmitter<number> = new EventEmitter<number>();
 
-  MAX_BTC_VALUE: number = 40100;
-  MIN_BTC_VALUE: number = 39900;
-
   private destroy$ = new Subject<void>();
 
   price: number = 40000;
