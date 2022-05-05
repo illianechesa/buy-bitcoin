@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
+import { Subject, interval } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Currency, Volatility } from 'src/app/core/enums';
 
 import { PriceService } from './price.service';
@@ -16,6 +18,8 @@ export class PriceComponent implements OnInit {
   MAX_BTC_VALUE: number = 40100;
   MIN_BTC_VALUE: number = 39900;
 
+  private destroy$ = new Subject<void>();
+
   price: number = 40000;
   volatility = Volatility;
   wentUp: Volatility = Volatility.EQUAl;
@@ -26,6 +30,11 @@ export class PriceComponent implements OnInit {
 
   ngOnInit(): void {
     this.initiatePricesLoop();
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   updateNewPrice(newPrice: number): void {
@@ -44,9 +53,13 @@ export class PriceComponent implements OnInit {
   }
 
   private initiatePricesLoop(): void {
-    setInterval(() => {
-      const newPrice = this.priceService.getPrice();
-      this.updateNewPrice(newPrice);
-    }, 1000);
+    interval(1000)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: () => {
+          const newPrice = this.priceService.getPrice();
+          this.updateNewPrice(newPrice);
+        },
+      });
   }
 }
